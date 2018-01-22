@@ -24,6 +24,8 @@ export default class Register extends Component {
     }
     console.log(UserData.find({username: text}).fetch());
     // Clear form
+    ReactDOM.findDOMNode(this.refs.name).value = '';
+    ReactDOM.findDOMNode(this.refs.email).value = '';
     ReactDOM.findDOMNode(this.refs.armchair).value = '';
   }
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import Row from "./Row.js"
 //import { Tasks } from '../api/tasks.js';
 // Task component - represents a single todo item
 
-export default class Buttons extends Component {
+export default class Leaderboard extends Component {
 
   render() {
 
-    return (
+/*    return (
     	<table>
       	<tr>
       		<th><div className="cell"><p>Player</p></div></th>
@@ -34,7 +35,13 @@ export default class Buttons extends Component {
 
       //</th>
 
-    );
-
+    );*/
+      return (
+        <div>
+          <Row username={"Alexa"} play={"Pass Short"} score={300} />
+          <Row username={"Bobert"} play={"Pass Medium"} score={150} />
+          <Row username={"Caitlin"} play={"Run Middle"} score={0} />
+        </div>
+      );
   }
 }

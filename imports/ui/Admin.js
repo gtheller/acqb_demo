@@ -3,6 +3,7 @@ import Leaderboard from './Leaderboard.js'
 import Buttons from './Buttons.js'
 import { PageNumber } from '../api/pageNum.js';
 import { UserData } from '../api/userCollection.js';
+import { IsAdmin } from '../api/adminCollection.js';
 
 export default class Admin extends Component {
 
@@ -39,12 +40,16 @@ export default class Admin extends Component {
     var temp = PageNumber.find().fetch()[0];
     PageNumber.update(temp._id, { $set: { val: 1 } });
     //reset user, score collection
-  }
+    //IsAdmin.remove({});
+    var allUsers = UserData.find().fetch()
+    Meteor.call('removeAllUsers');
+}
 
-  insertAns(num)
+  setCorrect(num)
   {
-    var temp = UserData.find({clientId: this.props.clientId}).fetch()[0];
-    UserData.update(temp._id, { $set: { answer: num } });
+    var temp = IsAdmin.find().fetch()[0];
+    IsAdmin.update(temp._id, { $set: { correctAns: num } });
+    console.log(IsAdmin.find().fetch()[0]);
   }
 
 
@@ -65,16 +70,16 @@ export default class Admin extends Component {
             <th><font size="20">Pass</font></th>
         	</tr>
         	<tr>
-        		<td> <button className="runButton">Left</button> </td>
-        		<td> <button  className="passButton">Short</button> </td>
+        		<td> <button className="runButton" onClick={this.setCorrect.bind(this,0)}>Left</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,1)}>Short</button> </td>
         	</tr>
         	<tr>
-        		<td> <button  className="runButton">Middle</button> </td>
-        		<td> <button  className="passButton">Medium</button> </td>
+        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,2)}>Middle</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,3)}>Medium</button> </td>
         	</tr>
         	<tr>
-        		<td> <button  className="runButton">Right</button> </td>
-        		<td> <button  className="passButton">Long</button> </td>
+        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,4)}>Right</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,5)}>Long</button> </td>
         	</tr>
         </table>
       </div>

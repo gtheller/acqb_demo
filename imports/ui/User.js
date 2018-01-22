@@ -22,6 +22,7 @@ export default class User extends Component {
         //console.log(cid);
         IsAdmin.insert({
           cid: cid,
+          correctAns: 0
         });
       }
       console.log("done adding cid");

@@ -6,9 +6,6 @@ export default class Buttons extends Component {
   insertAns(num)
   {
     var temp = UserData.find({clientId: this.props.clientId}).fetch()[0];
-    console.log("num: " + num);
-    console.log("temp");
-    console.log(temp);
     UserData.update(temp._id, { $set: { answer: num } });
   }
 
