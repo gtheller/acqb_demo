@@ -10,7 +10,7 @@ if (Meteor.isServer)
   console.log("IsAdmin added on server");
 }
 
-Meteor.methods({
+//Meteor.methods({
 /*  'tasks.insert'(text) {
     check(text, String);
 
@@ -48,4 +48,4 @@ Meteor.methods({
     var temp = PageNumber.find({name: "pageNum"}).val;
     PageNumber.update({ $set: { val: temp+1 } });
   },*/
-});
+//});

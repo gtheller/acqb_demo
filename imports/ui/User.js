@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { IsAdmin } from '../api/adminCollection.js';
+import { UserData } from '../api/userCollection.js';
 
 // App component - represents the whole app
 
@@ -14,16 +15,16 @@ export default class User extends Component {
 
     setNum(num)
     {
-      this.state.num = num;
+      console.log("adding cid");
       if(num==0)
       {
         var cid = this.props.clientId;
-        console.log(cid);
+        //console.log(cid);
         IsAdmin.insert({
-          cid: 1,
+          cid: cid,
         });
-
       }
+      console.log("done adding cid");
     }
 
   render() {

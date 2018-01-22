@@ -20,6 +20,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { PageNumber } from '../api/pageNum.js';
 import { Random } from 'meteor/random';
 import { IsAdmin } from '../api/adminCollection.js';
+import { UserData } from '../api/userCollection.js';
+import ReactDOM from 'react-dom';
 
 // App component - represents the whole app
 
@@ -39,10 +41,10 @@ export default class App extends Component {
   isadmin()
   {
     var cid = this.state.clientId;
-    console.log("cid: " + cid);
+    //console.log("cid: " + cid);
     //var obj = IsAdmin.find({cid: 1}).fetch();
-    var obj = IsAdmin.find({}).fetch();
-    console.log(obj);
+    var obj = IsAdmin.find({cid: cid}).fetch();
+    //console.log(obj);
     if(obj.length>0)
     {
       this.setState({admin: true});
@@ -53,16 +55,18 @@ export default class App extends Component {
 
   tick()
   {
-    console.log("page: " + this.state.page);
-    console.log("admin: " + this.state.admin);
+    //console.log("page: " + this.state.page);
+    //console.log("admin: " + this.state.admin);
 
     this.setState(prevState => ({
       seconds: prevState.seconds + 1
     }));
     var temp = PageNumber.find().fetch()[0];
     this.setState({ page: temp.val });
+    this.isadmin();
     //console.log(temp);
-    console.log("app: "+this.state.clientId);
+    //console.log("app: "+this.state.clientId);
+    console.log(UserData.find().fetch());
   }
 
   componentDidMount()
@@ -107,29 +111,15 @@ export default class App extends Component {
 
     return (
 
-      <div>
-        <div className="container">
-          {this.isadmin() ? <Admin/> : null}
-          { this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
-          { this.state.page==2&& !this.state.admin ? <Welcome/> : null }
-          { this.state.page==3&& !this.state.admin ? <Page2/> : null }
-          { this.state.page==4&& !this.state.admin ? <Avatar/> : null }
-          { this.state.page==5&& !this.state.admin ? <Wait/> : null }
-          { this.state.page==6&& !this.state.admin ? <Buttons/> : null }
-          { this.state.page==7&& !this.state.admin ? <Results/> : null }
-        </div>
-        <div>
-          <button onClick={this.decPage.bind(this)}>Prev</button>
-          <button onClick={this.incPage.bind(this)}>Next</button>
-          <p>{this.state.page}</p>
-          <select id="player" onChange={this.changePlayer.bind(this)}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-          <p>{this.state.player}</p>
-          </div>
+      <div className="container">
+        {this.state.admin ? <Admin/> : null}
+        { this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
+        { this.state.page==2&& !this.state.admin ? <Welcome/> : null }
+        { this.state.page==3&& !this.state.admin ? <Register clientId={this.state.clientId}/> : null }
+        { this.state.page==4&& !this.state.admin ? <Avatar/> : null }
+        { this.state.page==5&& !this.state.admin ? <Wait/> : null }
+        { this.state.page==6&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
+        { this.state.page==7&& !this.state.admin ? <Results/> : null }
       </div>
 
       );

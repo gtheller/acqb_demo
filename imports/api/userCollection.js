@@ -1,4 +1,4 @@
-UserDimport { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
@@ -6,7 +6,7 @@ export const UserData = new Mongo.Collection('usrdat');
 
 if (Meteor.isServer)
 {
-  Score.remove({});
+  UserData.remove({});
 }
 
 Meteor.methods({

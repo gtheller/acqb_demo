@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Leaderboard from './Leaderboard.js'
 import Buttons from './Buttons.js'
 import { PageNumber } from '../api/pageNum.js';
+import { UserData } from '../api/userCollection.js';
 
 export default class Admin extends Component {
 
@@ -39,6 +40,13 @@ export default class Admin extends Component {
     PageNumber.update(temp._id, { $set: { val: 1 } });
     //reset user, score collection
   }
+
+  insertAns(num)
+  {
+    var temp = UserData.find({clientId: this.props.clientId}).fetch()[0];
+    UserData.update(temp._id, { $set: { answer: num } });
+  }
+
 
   render() {
 
