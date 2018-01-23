@@ -55,7 +55,7 @@ export default class Register extends Component {
           <input className="regIn" type="text" ref="armchair" placeholder="Enter your Armchair Name"/>
           <br/><br/>
           <input className="regButt" type="submit" value="Submit"/>
-          <p id="confirm" ref="confirm">Acount Created!</p>
+          <p id="confirm" ref="confirm">Account Created!</p>
         </form>
         </div>
 
