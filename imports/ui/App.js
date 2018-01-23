@@ -12,6 +12,7 @@ import User from "./User.js"
 import Welcome from "./Welcome.js"
 import Admin from "./Admin.js"
 import Results from "./Results.js"
+import Answer from "./Answer.js"
 import { withTracker } from 'meteor/react-meteor-data';
 import { PageNumber } from '../api/pageNum.js';
 import { Random } from 'meteor/random';
@@ -61,8 +62,28 @@ export default class App extends Component {
     this.setState(prevState => ({
       seconds: prevState.seconds + 1
     }));
-    var temp = PageNumber.find().fetch()[0];
-    this.setState({ page: temp.val });
+
+
+    var temp;
+    //console.log(UserData.find({clientId: this.state.clientId}).fetch());
+    //console.log(UserData.find({clientId: this.state.clientId}).fetch().length);
+    if(UserData.find({clientId: this.state.clientId}).fetch().length>0)
+    {
+      temp = UserData.find({clientId: this.state.clientId}).fetch()[0].page;
+      //console.log("Using UD");
+      //console.log(temp);
+      //console.log();
+    }
+    else
+    {
+      temp = 1;
+      //temp = PageNumber.find().fetch()[0].val;
+      //console.log("Using PN");
+      //console.log(PageNumber.find().fetch());
+      //console.log(temp)
+      //console.log();
+    }
+    this.setState({ page: temp });
     this.isadmin();
     //console.log(temp);
     //console.log("app: "+this.state.clientId);
@@ -108,7 +129,7 @@ export default class App extends Component {
 
   setAdmin()
   {
-    console.log(IsAdmin.find().fetch());
+    //console.log(IsAdmin.find().fetch());
     var cid = this.state.clientId;
     //console.log(cid);
     if(IsAdmin.find().fetch().length==0)
@@ -126,15 +147,15 @@ export default class App extends Component {
         correctAns: "Left"
       });
     }
-    console.log(IsAdmin.find().fetch());
-    console.log();
+    //console.log(IsAdmin.find().fetch());
+    //console.log();
   }
 
   beAdmin()
   {
     var temp = this.state.count;
     this.setState({count: temp+1});
-    if(this.state.count>3)
+    if(this.state.count>1)
     {
       this.setAdmin();
       this.setState({count: 0});
@@ -150,12 +171,13 @@ export default class App extends Component {
       <div>
         <div className="container">
           {this.state.admin ? <Admin/> : null}
-          { this.state.page==1&& !this.state.admin ? <Welcome/> : null }
+          { this.state.page==1&& !this.state.admin ? <Welcome clientId={this.state.clientId}/> : null }
           { this.state.page==2&& !this.state.admin ? <Register clientId={this.state.clientId}/> : null }
-          { this.state.page==3&& !this.state.admin ? <Avatar/> : null }
-          { this.state.page==4&& !this.state.admin ? <Wait/> : null }
+          { this.state.page==3&& !this.state.admin ? <Avatar clientId={this.state.clientId}/> : null }
+          { this.state.page==4&& !this.state.admin ? <Wait clientId={this.state.clientId}/> : null }
           { this.state.page==5&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
-          { this.state.page==6&& !this.state.admin ? <Results/> : null }
+          { this.state.page==6&& !this.state.admin ? <Answer clientId={this.state.clientId} /> : null }
+          { this.state.page==7&& !this.state.admin ? <Results clientId={this.state.clientId}/> : null }
         </div>
         <div className="secretButt" onClick={this.beAdmin.bind(this)}></div>
       </div>

@@ -62,23 +62,15 @@ export default class Admin extends Component {
 
   checkAnswers()
   {
-    users = UserData.find({}).fetch();
-    console.log(users);
-    correct = IsAdmin.find().fetch()[0].correctAns;
-    //console.log(correct);
+    var users = UserData.find({}).fetch();
+    //console.log(users);
+    var correct = IsAdmin.find().fetch()[0].correctAns;
+
     for(var a=0; a<users.length; a++)
     {
-      console.log(correct);
-      console.log(typeof correct);
-      console.log(users[a].answer);
-      console.log(typeof users[a].answer);
-      console.log(users[a].answer==correct);
-      console.log();
       if(users[a].answer==correct)
       {
         UserData.update(users[a]._id, { $inc: {score: 100}});
-        console.log(UserData.find().fetch());
-        console.log();
         //this.setState();
       }
     }
@@ -87,9 +79,39 @@ export default class Admin extends Component {
 
   getPage()
   {
-    var arr = ["Welcome","Register","Avatar","Wait","Buttons","Results"];
+    var arr = ["Welcome","Register","Avatar","Wait","Buttons","Answer", "Results"];
     var num = PageNumber.find().fetch()[0].val-1;
     this.setState({pageName: arr[num]});
+  }
+
+  goToButtons()
+  {
+    var Users = UserData.find({}).fetch();
+    for(var a=0; a<Users.length; a++)
+    {
+      tempUser = Users[a];
+      UserData.update(tempUser._id, { $set: { page: 5 } });
+    }
+  }
+
+  goToAnswer()
+  {
+    var Users = UserData.find({}).fetch();
+    for(var a=0; a<Users.length; a++)
+    {
+      tempUser = Users[a];
+      UserData.update(tempUser._id, { $set: { page: 6 } });
+    }
+  }
+
+  goToBoard()
+  {
+    var Users = UserData.find({}).fetch();
+    for(var a=0; a<Users.length; a++)
+    {
+      tempUser = Users[a];
+      UserData.update(tempUser._id, { $set: { page: 7 } });
+    }
   }
 
   render() {
@@ -126,15 +148,15 @@ export default class Admin extends Component {
       <br/><br/><br/>
 
       <div align="center">
-        <button className="adButt" onClick={this.decPage.bind(this)}>Prev</button>
-        <p className="block">{this.state.pageName}</p>
-        <button className="adButt" onClick={this.incPage.bind(this)}>Next</button>
-      </div>
-
-      <div align="center">
         <button className="adButt" onClick={this.reset.bind(this)}>Reset Demo</button>
         <button className="adButt" onClick={this.checkAnswers.bind(this)}>Check Ans</button>
         <button className="adButt">Show Final</button>
+      </div>
+
+      <div align="center">
+        <button className="adButt" onClick={this.goToButtons.bind(this)}>Buttons</button>
+        <button className="adButt" onClick={this.goToAnswer.bind(this)}>Answers</button>
+        <button className="adButt" onClick={this.goToBoard.bind(this)}>Board</button>
       </div>
 
     </div>

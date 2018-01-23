@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { UserData } from "../api/userCollection.js"
 
 // App component - represents the whole app
 
@@ -13,42 +14,49 @@ export default class Page1 extends Component {
       //var arr = [<Home/>,<Register/>,<Buttons/>,<Leaderboard/>];
     }
 
-incPath()
-{
-  if(this.state.num > 4)
+  incPath()
   {
-    this.state.num = 4;
-    this.setState({path: "images/avatar"+this.state.num+".gif"});
+    var temp = this.state.num;
+    //var next = temp+1;
+    if(temp < 6)
+    {
+      this.setState({num: temp+1, path: "images/avatar"+(temp+1)+".gif"});
+    }
+    else
+    {
+      this.setState({num: 6, path: "images/avatar"+6+".gif"});
+    }
+    console.log(this.state.path);
   }
-  else
+
+  decPath()
   {
-    this.setState({num: this.state.num+1});
+    var temp = this.state.num;
+    //var next = temp+1;
+    if(temp > 1)
+    {
+      this.setState({num: temp-1, path: "images/avatar"+(temp-1)+".gif"});
+    }
+    else
+    {
+      this.setState({num: 1, path: "images/avatar"+1+".gif"});
+    }
+    //console.log(this.state.path);
   }
-  this.setState({path: "images/avatar"+this.state.num+".gif"});
-  console.log(this.state.path);
-}
-decPath()
-{
-  if(this.state.num < 1)
+
+  nextPage()
   {
-    this.state.num = 1;
-    this.setState({path: "images/avatar"+this.state.num+".gif"});
+    var tempUser = UserData.find({clientId: this.props.clientId}).fetch()[0];
+    UserData.update(tempUser._id, { $set: { page: 4 } });
   }
-  else
-  {
-    this.setState({num: this.state.num-1});
-  }
-  this.setState({path: "images/avatar"+this.state.num+".gif"});
-  console.log(this.state.path);
-}
 
   render() {
     return (
 
-      <div className="container">
+      <div>
       <header>Avatar</header>
         <div align="center">
-          <img src="images/logo.png" alt="logo" width="100" height="100"/>
+          <img src="images/ACQB_logo_draft.png" alt="logo" width="200" height="100"/>
           <div>
             <p className="h1">Armchair Quarterback</p>
             <p className="h2">Choose your Avatar</p>
@@ -59,6 +67,7 @@ decPath()
             <img src={this.state.path} alt="avatar" width="400" height="600"/>
             <button className="avatarButt" onClick={this.incPath.bind(this)}>Next</button>
           </span>
+          <div align="center"><button onClick={this.nextPage.bind(this)} className="avatarButt">Finish</button></div>
         </div>
 
       </div>

@@ -8,9 +8,10 @@ export default class Row extends Component {
 
     return (
       <div>
+        <p className="place">{(this.props.rank+1)+")"}</p>
         <p className="block">{this.props.username}</p>
         <p className="block">{this.props.play}</p>
-        <p className="block">{this.props.score}</p>
+        <p className="place">{this.props.score}</p>
       </div>
     );
   }

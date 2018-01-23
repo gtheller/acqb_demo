@@ -5,11 +5,13 @@ import { UserData } from "../api/userCollection.js"
 export default class Leaderboard extends Component {
 
   renderUsers() {
-    //console.log(UserData.find({}, { sort: { createdAt: -1 } }).fetch());
-    return UserData.find({}).fetch().map((user) => {
+    var sortedUsers = UserData.find({}, { sort: { score: -1 } }).fetch();
+    return sortedUsers.map((user) => {
 
+      num = sortedUsers.indexOf(user);
       return (
         <Row
+          rank={num}
           username={user.username}
           play={user.answer}
           score={user.score}
@@ -21,10 +23,8 @@ export default class Leaderboard extends Component {
   render() {
 
     return (
-      <div className="leaderDiv">
-        <ul>
-          {this.renderUsers()}
-        </ul>
+      <div align="center" className="leaderDiv">
+        {this.renderUsers()}
       </div>
     )
 

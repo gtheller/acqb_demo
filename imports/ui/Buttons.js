@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { UserData } from '../api/userCollection.js';
+import ReactDOM from 'react-dom';
 
 export default class Buttons extends Component {
 
@@ -7,6 +8,13 @@ export default class Buttons extends Component {
   {
     var temp = UserData.find({clientId: this.props.clientId}).fetch()[0];
     UserData.update(temp._id, { $set: { answer: num } });
+  }
+
+  lockIn()
+  {
+    var temp = ReactDOM.findDOMNode(this.refs.confirm);
+    temp.style.visibility = "visible";
+
   }
 
   render() {
@@ -36,7 +44,8 @@ export default class Buttons extends Component {
       </tbody>
       </table>
       <br/><br/>
-      <div align="center"><button className="lock">Lock it in!</button></div>
+      <div align="center"><button onClick={this.lockIn.bind(this)} className="lock">Lock it in!</button></div>
+      <p id="confirm" ref="confirm">Locked In!</p>
     </div>
     );
 
