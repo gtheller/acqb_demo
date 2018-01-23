@@ -1,9 +1,42 @@
 /* CSS declarations go here*/
+.wait {
+  font-size: 100px;
+}
+
+#confirm {
+  visibility: hidden;
+  font-size: 36px;
+  color: #00cc00;
+}
+
+.avatarButt {
+  font-size: 48px;
+  padding: 20px;
+}
+
+.regIn {
+  padding: 20px;
+  font-size: 36px;
+}
+
+.regButt {
+  padding: 20px;
+  font-size: 48px;
+}
+
+p.h1 {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+p.h2 {
+  font-size: 50px;
+}
 
 p.block {
-  font-size : 20px;
+  font-size : 48px;
   display: inline-block;
-  width: 200px;
+  width: 325px;
   text-align: center;
   vertical-align: middle;
 }
@@ -14,7 +47,7 @@ p.block {
   border-radius: 8px;
   font-family: Arial;
   color: #000000;
-  font-size: 22px;
+  font-size: 48px;
   padding: 32px;
   background: #bababa;
 }
@@ -33,8 +66,8 @@ p.block {
   border-radius: 8px;
   font-family: Arial;
   color: #000000;
-  font-size: 22px;
-  padding: 32px;
+  font-size: 48px;
+  padding: 64px;
   background: #bababa;
 }
 
@@ -45,10 +78,10 @@ p.block {
   border-radius: 8px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 40px;
+  font-size: 64px;
   background: #34d96e;
-  height: 100px;
-  width: 250px;
+  height: 180px;
+  width: 400px;
 }
 
 .passButton {
@@ -57,10 +90,10 @@ p.block {
   border-radius: 8px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 40px;
+  font-size: 64px;
   background: #3486d9;
-  height: 100px;
-  width: 250px;
+  height: 180px;
+  width: 400px;
 }
 
 .playerButton {
@@ -92,7 +125,7 @@ p.block {
   border-radius: 28px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 33px;
+  font-size: 64px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
@@ -122,7 +155,7 @@ body {
 
   background-color: #315481;
 
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  /*background-image: linear-gradient(to bottom, #315481, #918e82 100%);*/
 
   background-attachment: fixed;
 
@@ -153,12 +186,13 @@ body {
 
 .container {
 
-  max-width: 600px;
-  min-width: 550px;
+  min-width: 1000px;
+  max-width: 1000px;
 
   margin: 0 auto;
 
-  min-height: 800px;
+  min-height: 1600px;
+  max-height: 1600px;
 
   background: white;
 
@@ -167,6 +201,9 @@ body {
 
 
 header {
+  text-align: center;
+
+  font-size: 36px;
 
   background: #d2edf4;
 

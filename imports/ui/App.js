@@ -66,7 +66,7 @@ export default class App extends Component {
     this.isadmin();
     //console.log(temp);
     //console.log("app: "+this.state.clientId);
-    console.log(UserData.find().fetch());
+    //console.log(UserData.find().fetch());
   }
 
   componentDidMount()
@@ -74,19 +74,19 @@ export default class App extends Component {
     this.interval = setInterval(() => this.tick(), 250);
   }
 
-
   incPage()
   {
-    if(this.state.page<7)
+    if(this.state.page<6)
     {
       this.setState({page: this.state.page+1,});
     }
     else
     {
-      this.state.page = 7;
+      this.state.page = 6;
     }
-    console.log("inc");
+    //console.log("inc");
   }
+
   decPage()
   {
     if(this.state.page>1)
@@ -97,7 +97,7 @@ export default class App extends Component {
     {
       this.state.page = 1;
     }
-    console.log("dec");
+    //console.log("dec");
   }
 
   changePlayer()
@@ -106,22 +106,35 @@ export default class App extends Component {
     this.setState({player: p,});
   }
 
+  setAdmin()
+  {
+    var cid = this.state.clientId;
+    //console.log(cid);
+    IsAdmin.insert({
+      cid: cid,
+      correctAns: 0
+    });
+  }
+
+  //{ this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
+
 
   render() {
 
     return (
-
-      <div className="container">
-        {this.state.admin ? <Admin/> : null}
-        { this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
-        { this.state.page==2&& !this.state.admin ? <Welcome/> : null }
-        { this.state.page==3&& !this.state.admin ? <Register clientId={this.state.clientId}/> : null }
-        { this.state.page==4&& !this.state.admin ? <Avatar/> : null }
-        { this.state.page==5&& !this.state.admin ? <Wait/> : null }
-        { this.state.page==6&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
-        { this.state.page==7&& !this.state.admin ? <Results/> : null }
+      <div>
+        <div className="container">
+          {this.state.admin ? <Admin/> : null}
+          { this.state.page==1&& !this.state.admin ? <Welcome/> : null }
+          { this.state.page==2&& !this.state.admin ? <Register clientId={this.state.clientId}/> : null }
+          { this.state.page==3&& !this.state.admin ? <Avatar/> : null }
+          { this.state.page==4&& !this.state.admin ? <Wait/> : null }
+          { this.state.page==5&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
+          { this.state.page==6&& !this.state.admin ? <Results/> : null }
+        </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <div><button className="adButt" onClick={this.setAdmin.bind(this)}>Admin</button></div>
       </div>
-
       );
 
     }

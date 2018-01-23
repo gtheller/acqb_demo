@@ -18,7 +18,7 @@ export default class Admin extends Component {
     {
       PageNumber.update(temp._id, { $set: { val: 7 } });
     }
-    console.log(temp);
+    //console.log(temp);
   }
 
   decPage()
@@ -32,7 +32,7 @@ export default class Admin extends Component {
     {
       PageNumber.update(temp._id, { $set: { val: 1 } });
     }
-    console.log(temp);
+    //console.log(temp);
   }
 
   reset()
@@ -49,7 +49,7 @@ export default class Admin extends Component {
   {
     var temp = IsAdmin.find().fetch()[0];
     IsAdmin.update(temp._id, { $set: { correctAns: num } });
-    console.log(IsAdmin.find().fetch()[0]);
+    //console.log(IsAdmin.find().fetch()[0]);
   }
 
 
@@ -57,9 +57,7 @@ export default class Admin extends Component {
 
     return (
     <div>
-      <header>
-        <h1>Admin</h1>
-      </header>
+      <header>Admin</header>
       {<Leaderboard/>}
       <br/>
       <div>

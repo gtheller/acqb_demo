@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://demo:demo@ds111638.mlab.com:11638/usrdat"
+    }
+  }
+}

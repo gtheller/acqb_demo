@@ -11,7 +11,6 @@ export default class Row extends Component {
         <p className="block">{this.props.username}</p>
         <p className="block">{this.props.play}</p>
         <p className="block">{this.props.score}</p>
-        <br/>
       </div>
     );
   }

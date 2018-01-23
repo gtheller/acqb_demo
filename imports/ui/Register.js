@@ -10,7 +10,7 @@ export default class Register extends Component {
     event.preventDefault();
     // Find the text field via the React ref
     const text = ReactDOM.findDOMNode(this.refs.armchair).value;
-    console.log(text);
+    //console.log(text);
 
     if(UserData.find({clientId: this.props.clientId}).fetch().length==0)
     {
@@ -22,39 +22,40 @@ export default class Register extends Component {
       answer: 0
       });
     }
-    console.log(UserData.find({username: text}).fetch());
+    //console.log(UserData.find({username: text}).fetch());
     // Clear form
     ReactDOM.findDOMNode(this.refs.name).value = '';
     ReactDOM.findDOMNode(this.refs.email).value = '';
     ReactDOM.findDOMNode(this.refs.armchair).value = '';
+
+    var temp = ReactDOM.findDOMNode(this.refs.confirm);
+    //console.log(temp);
+    temp.style.visibility = "visible";
   }
-
-
 
   render() {
     return (
 
       <div>
-      <header>
-        <h1>Sign Up</h1>
-      </header>
+      <header>Sign Up</header>
         <div align="center">
-          <img src="images/logo.png" alt="logo" width="100" height="100"/>
+          <img src="images/logo.png" alt="logo" width="300" height="300"/>
           <div>
-          <h1>Armchair Quarterback</h1>
+          <p className="h1">Armchair Quarterback</p>
           <br/>
           </div>
         </div>
 
         <div align="center">
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="name" placeholder="Enter your Name"/>
+          <input className="regIn" type="text" ref="name" placeholder="Enter your Name"/>
           <br/>
-          <input type="text" ref="email" placeholder="Enter your email"/>
+          <input className="regIn" type="text" ref="email" placeholder="Enter your email"/>
           <br/>
-          <input type="text" ref="armchair" placeholder="Enter your Armchair Name"/>
+          <input className="regIn" type="text" ref="armchair" placeholder="Enter your Armchair Name"/>
           <br/><br/>
-          <input type="submit" value="Submit"/>
+          <input className="regButt" type="submit" value="Submit"/>
+          <p id="confirm" ref="confirm">Acount Created!</p>
         </form>
         </div>
 

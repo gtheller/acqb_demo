@@ -7,21 +7,20 @@ export default class Wait extends Component {
   render() {
     return (
       <div>
-      <header>
-        <h1>Ready</h1>
-      </header>
+      <header>Ready</header>
         <div align="center">
+          <br/>
           <img src="images/logo.png" alt="logo" width="100" height="100"/>
           <div>
-          <h1>Welcome to Armchair Quarterback</h1>
-          <br/><br/><br/>
-          <h2>Ready to own your friends?</h2>
+          <p className ="h1">Welcome to Armchair Quarterback</p>
           <br/>
+          <p className="h2">Ready to own your friends?</p>
+          <br/><br/>
           </div>
         </div>
 
         <div align="center">
-        <p><font size="6">Game will begin at 1:00 pm ET</font></p>
+        <p className="wait">Game will begin at 1:00 pm ET</p>
         </div>
 
       </div>

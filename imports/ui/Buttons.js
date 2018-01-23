@@ -13,14 +13,12 @@ export default class Buttons extends Component {
 
     return (
     <div>
-      <header>
-        <h1>Your Call...</h1>
-      </header>
-
+      <header>Your Call...</header>
+      <br/><br/><br/><br/>
       <table>
     	<tr>
-    		<th><font size="20">Run</font></th>
-        <th><font size="20">Pass</font></th>
+    		<th><font size="40">Run</font></th>
+        <th><font size="40">Pass</font></th>
     	</tr>
     	<tr>
     		<td> <button className="runButton" onClick={this.insertAns.bind(this,0)}>Left</button> </td>

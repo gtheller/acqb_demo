@@ -6,15 +6,13 @@ export default class Welcome extends Component {
 
   render() {
     return (
-      <div className="container">
-      <header>
-        <h1>Welcome</h1>
-      </header>
+      <div>
+      <header>Welcome</header>
         <div align="center">
-          <img src="images/logo.png" alt="logo" width="100" height="100"/>
+          <img src="images/logo.png" alt="logo" width="300" height="300"/>
           <div>
-          <h1>Armchair Quarterback</h1>
-          <h2>Who has bragging rights?</h2>
+          <p className="h1">Armchair Quarterback</p>
+          <p className="h2">Who has bragging rights?</p>
           </div>
         </div>
         <div align="center"><button className="startButton">Get Started</button></div>
