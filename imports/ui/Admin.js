@@ -65,7 +65,23 @@ export default class Admin extends Component {
     users = UserData.find({}).fetch();
     console.log(users);
     correct = IsAdmin.find().fetch()[0].correctAns;
-    console.log(correct);
+    //console.log(correct);
+    for(var a=0; a<users.length; a++)
+    {
+      console.log(correct);
+      console.log(typeof correct);
+      console.log(users[a].answer);
+      console.log(typeof users[a].answer);
+      console.log(users[a].answer==correct);
+      console.log();
+      if(users[a].answer==correct)
+      {
+        UserData.update(users[a]._id, { $inc: {score: 100}});
+        console.log(UserData.find().fetch());
+        console.log();
+        //this.setState();
+      }
+    }
     //UserData.update(users._id, { $inc: { score: users.answer==correct ? 10 : -10 } });
   }
 
@@ -92,16 +108,16 @@ export default class Admin extends Component {
             <th><font size="20">Pass</font></th>
         	</tr>
         	<tr>
-        		<td> <button className="runButton" onClick={this.setCorrect.bind(this,0)}>Left</button> </td>
-        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,1)}>Short</button> </td>
+        		<td> <button className="runButton" onClick={this.setCorrect.bind(this,"Left")}>Left</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,"Short")}>Short</button> </td>
         	</tr>
         	<tr>
-        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,2)}>Middle</button> </td>
-        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,3)}>Medium</button> </td>
+        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,"Middle")}>Middle</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,"Medium")}>Medium</button> </td>
         	</tr>
         	<tr>
-        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,4)}>Right</button> </td>
-        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,5)}>Long</button> </td>
+        		<td> <button  className="runButton" onClick={this.setCorrect.bind(this,"Right")}>Right</button> </td>
+        		<td> <button  className="passButton" onClick={this.setCorrect.bind(this,"Long")}>Long</button> </td>
         	</tr>
         </tbody>
         </table>
@@ -109,15 +125,15 @@ export default class Admin extends Component {
 
       <br/><br/><br/>
 
-      <div className="centerDiv">
+      <div align="center">
         <button className="adButt" onClick={this.decPage.bind(this)}>Prev</button>
         <p className="block">{this.state.pageName}</p>
         <button className="adButt" onClick={this.incPage.bind(this)}>Next</button>
       </div>
 
-      <div>
+      <div align="center">
         <button className="adButt" onClick={this.reset.bind(this)}>Reset Demo</button>
-        <button className="adButt">Check Ans</button>
+        <button className="adButt" onClick={this.checkAnswers.bind(this)}>Check Ans</button>
         <button className="adButt">Show Final</button>
       </div>
 

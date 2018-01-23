@@ -7,7 +7,7 @@ export default class Leaderboard extends Component {
   renderUsers() {
     //console.log(UserData.find({}, { sort: { createdAt: -1 } }).fetch());
     return UserData.find({}).fetch().map((user) => {
-      
+
       return (
         <Row
           username={user.username}
@@ -21,7 +21,7 @@ export default class Leaderboard extends Component {
   render() {
 
     return (
-      <div>
+      <div className="leaderDiv">
         <ul>
           {this.renderUsers()}
         </ul>

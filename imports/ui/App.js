@@ -49,6 +49,7 @@ export default class App extends Component {
       this.setState({admin: true});
       return true;
     }
+    this.setState({admin: false});
     return false;
   }
 
@@ -107,12 +108,26 @@ export default class App extends Component {
 
   setAdmin()
   {
+    console.log(IsAdmin.find().fetch());
     var cid = this.state.clientId;
     //console.log(cid);
-    IsAdmin.insert({
-      cid: cid,
-      correctAns: 0
-    });
+    if(IsAdmin.find().fetch().length==0)
+    {
+      IsAdmin.insert({
+        cid: this.state.clientId,
+        correctAns: "Left"
+      });
+    }
+    else
+    {
+      var temp = IsAdmin.find().fetch()[0];
+      IsAdmin.update(temp._id, {
+        cid: this.state.clientId,
+        correctAns: "Left"
+      });
+    }
+    console.log(IsAdmin.find().fetch());
+    console.log();
   }
 
   beAdmin()
@@ -122,6 +137,7 @@ export default class App extends Component {
     if(this.state.count>3)
     {
       this.setAdmin();
+      this.setState({count: 0});
     }
   }
 

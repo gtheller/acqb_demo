@@ -1,5 +1,9 @@
 /* CSS declarations go here*/
 
+.leaderDiv {
+  min-height: 400px;
+}
+
 .secretButt {
   height: 100px;
   width: 1000px;
