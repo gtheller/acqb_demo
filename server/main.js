@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/tasks.js';
 import { Mongo } from 'meteor/mongo';
 import '../imports/api/pageNum.js'
 import { UserData } from '../imports/api/userCollection.js'
+import { IsAdmin } from '../imports/api/adminCollection.js'
 import '../imports/api/adminCollection.js'
 
 /*Meteor.startup(() => {
@@ -16,6 +16,9 @@ if (Meteor.isServer) {
     return Meteor.methods({
       removeAllUsers: function() {
         return UserData.remove({});
+      },
+      removeAllAdmins: function() {
+        return IsAdmin.remove({});
       }
     });
   });

@@ -4,10 +4,6 @@ import Home from "./Home.js";
 import Register from "./Register.js";
 import Buttons from "./Buttons.js";
 import Leaderboard from "./Leaderboard.js";
-import Page1 from "./Page1.js"
-import Page2 from "./Page2.js"
-import Page3 from "./Page3.js"
-import Page4 from "./Page4.js"
 import Avatar from "./Avatar.js"
 import Taunt from "./Taunt.js"
 import Send from "./Send.js"
@@ -29,13 +25,16 @@ export default class App extends Component {
   constructor(props)
   {
     super(props);
+    //document.body.requestFullscreen();
     this.state = {
       page: 1,
       player: 1,
       score: 0,
       admin: false,
       seconds: 0,
-      clientId: Random.id()};
+      clientId: Random.id(),
+      count: 0
+    };
   }
 
   isadmin()
@@ -116,6 +115,16 @@ export default class App extends Component {
     });
   }
 
+  beAdmin()
+  {
+    var temp = this.state.count;
+    this.setState({count: temp+1});
+    if(this.state.count>3)
+    {
+      this.setAdmin();
+    }
+  }
+
   //{ this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
 
 
@@ -132,10 +141,11 @@ export default class App extends Component {
           { this.state.page==5&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
           { this.state.page==6&& !this.state.admin ? <Results/> : null }
         </div>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <div><button className="adButt" onClick={this.setAdmin.bind(this)}>Admin</button></div>
+        <div className="secretButt" onClick={this.beAdmin.bind(this)}></div>
       </div>
       );
+      //<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      //<div><button className="adButt" onClick={this.setAdmin.bind(this)}>Admin</button></div>
 
     }
 

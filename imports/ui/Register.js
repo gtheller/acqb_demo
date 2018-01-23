@@ -19,7 +19,7 @@ export default class Register extends Component {
       username: text,
       score: 0,
       createdAt: new Date(),
-      answer: 0
+      answer: "None"
       });
     }
     //console.log(UserData.find({username: text}).fetch());

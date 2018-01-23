@@ -9,6 +9,7 @@ export default class Welcome extends Component {
       <div>
       <header>Welcome</header>
         <div align="center">
+          <br/>
           <img src="images/logo.png" alt="logo" width="300" height="300"/>
           <div>
           <p className="h1">Armchair Quarterback</p>

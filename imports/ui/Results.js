@@ -3,7 +3,7 @@ import Leaderboard from "./Leaderboard.js"
 //import { Tasks } from '../api/tasks.js';
 // Task component - represents a single todo item
 
-export default class Page4 extends Component {
+export default class Results extends Component {
 Scaores
   render() {
 
