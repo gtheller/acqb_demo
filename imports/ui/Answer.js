@@ -32,12 +32,14 @@ export default class Results extends Component {
 
     return (
     <div align="center">
-      <header>
-        <h1>Answer</h1>
-      </header>
-      <p className="h2">Your Call...</p>
+      <header>Answer</header>
+      <br/>
+      <img src="images/ACQB_logo_draft.png" alt="logo" width="400" height="200"/>
+      <br/><br/>
+      <p className="h1">Your Call...</p>
       <p className="h2">{this.state.answer}</p>
-      <p className="h2">Result...</p>
+      <br/><br/>
+      <p className="h1">Result...</p>
       <p className="h2">{this.state.correct}</p>
       <br/><br/><br/><br/>
       <p className="h1">{this.state.message}</p>

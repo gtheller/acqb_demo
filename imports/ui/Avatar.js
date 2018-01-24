@@ -10,14 +10,11 @@ export default class Page1 extends Component {
       num: 1,
       path: "images/avatar1.gif"
     };
-      //this.page = new ReactiveVar(0);
-      //var arr = [<Home/>,<Register/>,<Buttons/>,<Leaderboard/>];
-    }
+  }
 
   incPath()
   {
     var temp = this.state.num;
-    //var next = temp+1;
     if(temp < 6)
     {
       this.setState({num: temp+1, path: "images/avatar"+(temp+1)+".gif"});
@@ -32,7 +29,6 @@ export default class Page1 extends Component {
   decPath()
   {
     var temp = this.state.num;
-    //var next = temp+1;
     if(temp > 1)
     {
       this.setState({num: temp-1, path: "images/avatar"+(temp-1)+".gif"});
@@ -41,7 +37,6 @@ export default class Page1 extends Component {
     {
       this.setState({num: 1, path: "images/avatar"+1+".gif"});
     }
-    //console.log(this.state.path);
   }
 
   nextPage()
@@ -56,7 +51,8 @@ export default class Page1 extends Component {
       <div>
       <header>Avatar</header>
         <div align="center">
-          <img src="images/ACQB_logo_draft.png" alt="logo" width="200" height="100"/>
+          <br/>
+          <img src="images/ACQB_logo_draft.png" alt="logo" width="400" height="200"/>
           <div>
             <p className="h1">Armchair Quarterback</p>
             <p className="h2">Choose your Avatar</p>

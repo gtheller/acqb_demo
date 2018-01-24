@@ -10,7 +10,7 @@ export default class Wait extends Component {
       <header>Ready</header>
         <div align="center">
           <br/>
-          <img src="images/logo.png" alt="logo" width="100" height="100"/>
+          <img src="images/ACQB_logo_draft.png" alt="logo" width="400" height="200"/>
           <div>
           <p className ="h1">Welcome to Armchair Quarterback</p>
           <br/>

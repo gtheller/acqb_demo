@@ -1,63 +1,21 @@
 import React, { Component } from 'react';
 import Leaderboard from './Leaderboard.js'
 import Buttons from './Buttons.js'
-import { PageNumber } from '../api/pageNum.js';
 import { UserData } from '../api/userCollection.js';
 import { IsAdmin } from '../api/adminCollection.js';
 
 export default class Admin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pageName: "Welcome"
-    };
-  }
-
-  incPage()
-  {
-    var temp = PageNumber.find().fetch()[0];
-    if(temp.val<7)
-    {
-      PageNumber.update(temp._id, { $inc: { val: 1 } });
-    }
-    else
-    {
-      PageNumber.update(temp._id, { $set: { val: 7 } });
-    }
-    this.getPage();
-  }
-
-  decPage()
-  {
-    var temp = PageNumber.find().fetch()[0];
-    if(temp.val>1)
-    {
-      PageNumber.update(temp._id, { $inc: { val: -1 } });
-    }
-    else
-    {
-      PageNumber.update(temp._id, { $set: { val: 1 } });
-    }
-    this.getPage();
-  }
 
   reset()
   {
-    var temp = PageNumber.find().fetch()[0];
-    PageNumber.update(temp._id, { $set: { val: 1 } });
-    //reset user, score collection
-    //IsAdmin.remove({});
-    var allUsers = UserData.find().fetch()
     Meteor.call('removeAllUsers');
     Meteor.call('removeAllAdmins');
-    this.getPage();
   }
 
   setCorrect(num)
   {
     var temp = IsAdmin.find().fetch()[0];
     IsAdmin.update(temp._id, { $set: { correctAns: num } });
-    //console.log(IsAdmin.find().fetch()[0]);
   }
 
   checkAnswers()
@@ -66,51 +24,31 @@ export default class Admin extends Component {
     //console.log(users);
     var correct = IsAdmin.find().fetch()[0].correctAns;
 
+    var numCorrect = 0;
     for(var a=0; a<users.length; a++)
     {
       if(users[a].answer==correct)
       {
-        UserData.update(users[a]._id, { $inc: {score: 100}});
-        //this.setState();
+        numCorrect++;
       }
     }
-    //UserData.update(users._id, { $inc: { score: users.answer==correct ? 10 : -10 } });
-  }
 
-  getPage()
-  {
-    var arr = ["Welcome","Register","Avatar","Wait","Buttons","Answer", "Results"];
-    var num = PageNumber.find().fetch()[0].val-1;
-    this.setState({pageName: arr[num]});
-  }
-
-  goToButtons()
-  {
-    var Users = UserData.find({}).fetch();
-    for(var a=0; a<Users.length; a++)
+    for(var a=0; a<users.length; a++)
     {
-      tempUser = Users[a];
-      UserData.update(tempUser._id, { $set: { page: 5 } });
+      if(users[a].answer==correct)
+      {
+        UserData.update(users[a]._id, { $inc: {score: Math.round(100/numCorrect)}});
+      }
     }
   }
 
-  goToAnswer()
+  goToNum(num)
   {
     var Users = UserData.find({}).fetch();
     for(var a=0; a<Users.length; a++)
     {
       tempUser = Users[a];
-      UserData.update(tempUser._id, { $set: { page: 6 } });
-    }
-  }
-
-  goToBoard()
-  {
-    var Users = UserData.find({}).fetch();
-    for(var a=0; a<Users.length; a++)
-    {
-      tempUser = Users[a];
-      UserData.update(tempUser._id, { $set: { page: 7 } });
+      UserData.update(tempUser._id, { $set: { page: num } });
     }
   }
 
@@ -145,22 +83,25 @@ export default class Admin extends Component {
         </table>
       </div>
 
-      <br/><br/><br/>
+      <br/><br/>
 
       <div align="center">
         <button className="adButt" onClick={this.reset.bind(this)}>Reset Demo</button>
-        <button className="adButt" onClick={this.checkAnswers.bind(this)}>Check Ans</button>
-        <button className="adButt">Show Final</button>
+        <button className="adButt" onClick={this.checkAnswers.bind(this)}>Check Answers</button>
+      </div>
+      <br/><br/>
+      <div align="center">
+        <button className="adButt" onClick={this.goToNum.bind(this,5)}>Question</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,6)}>Results</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,7)}>Board</button>
+      </div>
+      <br/><br/>
+      <div align="center">
+        <button className="adButt" onClick={this.goToNum.bind(this,8)}>Show Winner</button>
       </div>
 
-      <div align="center">
-        <button className="adButt" onClick={this.goToButtons.bind(this)}>Buttons</button>
-        <button className="adButt" onClick={this.goToAnswer.bind(this)}>Answers</button>
-        <button className="adButt" onClick={this.goToBoard.bind(this)}>Board</button>
-      </div>
 
     </div>
     );
   }
 }
-//<span className="adSpan">{this.state.pageName}</span>

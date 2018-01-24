@@ -27,13 +27,5 @@ export default class Leaderboard extends Component {
         {this.renderUsers()}
       </div>
     )
-
-/*    return (
-      <div>
-        <Row username={"Alexa"} play={"Pass Short"} score={300} />
-        <Row username={"Bobert"} play={"Pass Medium"} score={150} />
-        <Row username={"Caitlin"} play={"Run Middle"} score={0} />
-      </div>
-    );*/
   }
 }

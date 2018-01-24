@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import { ReactiveVar } from 'meteor/reactive-var';
 import Home from "./Home.js";
 import Register from "./Register.js";
 import Buttons from "./Buttons.js";
 import Leaderboard from "./Leaderboard.js";
 import Avatar from "./Avatar.js"
-import Taunt from "./Taunt.js"
-import Send from "./Send.js"
 import Wait from "./Wait.js"
 import User from "./User.js"
 import Welcome from "./Welcome.js"
 import Admin from "./Admin.js"
 import Results from "./Results.js"
 import Answer from "./Answer.js"
-import { withTracker } from 'meteor/react-meteor-data';
-import { PageNumber } from '../api/pageNum.js';
+import Final from "./Final.js"
 import { Random } from 'meteor/random';
 import { IsAdmin } from '../api/adminCollection.js';
 import { UserData } from '../api/userCollection.js';
@@ -29,7 +25,6 @@ export default class App extends Component {
     //document.body.requestFullscreen();
     this.state = {
       page: 1,
-      player: 1,
       score: 0,
       admin: false,
       seconds: 0,
@@ -41,10 +36,7 @@ export default class App extends Component {
   isadmin()
   {
     var cid = this.state.clientId;
-    //console.log("cid: " + cid);
-    //var obj = IsAdmin.find({cid: 1}).fetch();
     var obj = IsAdmin.find({cid: cid}).fetch();
-    //console.log(obj);
     if(obj.length>0)
     {
       this.setState({admin: true});
@@ -54,45 +46,26 @@ export default class App extends Component {
     return false;
   }
 
+  componentDidMount()
+  {
+    this.interval = setInterval(() => this.tick(), 250);
+  }
+
   tick()
   {
-    //console.log("page: " + this.state.page);
-    //console.log("admin: " + this.state.admin);
-
     this.setState(prevState => ({
       seconds: prevState.seconds + 1
     }));
 
 
-    var temp;
-    //console.log(UserData.find({clientId: this.state.clientId}).fetch());
-    //console.log(UserData.find({clientId: this.state.clientId}).fetch().length);
+    var temp = 1;
     if(UserData.find({clientId: this.state.clientId}).fetch().length>0)
     {
       temp = UserData.find({clientId: this.state.clientId}).fetch()[0].page;
-      //console.log("Using UD");
-      //console.log(temp);
-      //console.log();
-    }
-    else
-    {
-      temp = 1;
-      //temp = PageNumber.find().fetch()[0].val;
-      //console.log("Using PN");
-      //console.log(PageNumber.find().fetch());
-      //console.log(temp)
-      //console.log();
     }
     this.setState({ page: temp });
-    this.isadmin();
-    //console.log(temp);
-    //console.log("app: "+this.state.clientId);
-    //console.log(UserData.find().fetch());
-  }
 
-  componentDidMount()
-  {
-    this.interval = setInterval(() => this.tick(), 250);
+    this.isadmin();
   }
 
   incPage()
@@ -105,7 +78,6 @@ export default class App extends Component {
     {
       this.state.page = 6;
     }
-    //console.log("inc");
   }
 
   decPage()
@@ -118,20 +90,11 @@ export default class App extends Component {
     {
       this.state.page = 1;
     }
-    //console.log("dec");
-  }
-
-  changePlayer()
-  {
-    var p = document.getElementById("player").value;
-    this.setState({player: p,});
   }
 
   setAdmin()
   {
-    //console.log(IsAdmin.find().fetch());
     var cid = this.state.clientId;
-    //console.log(cid);
     if(IsAdmin.find().fetch().length==0)
     {
       IsAdmin.insert({
@@ -147,8 +110,6 @@ export default class App extends Component {
         correctAns: "Left"
       });
     }
-    //console.log(IsAdmin.find().fetch());
-    //console.log();
   }
 
   beAdmin()
@@ -161,9 +122,6 @@ export default class App extends Component {
       this.setState({count: 0});
     }
   }
-
-  //{ this.state.page==1&& !this.state.admin ? <User clientId={this.state.clientId}/> : null }
-
 
   render() {
 
@@ -178,13 +136,11 @@ export default class App extends Component {
           { this.state.page==5&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
           { this.state.page==6&& !this.state.admin ? <Answer clientId={this.state.clientId} /> : null }
           { this.state.page==7&& !this.state.admin ? <Results clientId={this.state.clientId}/> : null }
+          { this.state.page==8&& !this.state.admin ? <Final clientId={this.state.clientId}/> : null }
         </div>
         <div className="secretButt" onClick={this.beAdmin.bind(this)}></div>
       </div>
       );
-      //<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      //<div><button className="adButt" onClick={this.setAdmin.bind(this)}>Admin</button></div>
-
     }
 
   }
