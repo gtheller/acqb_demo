@@ -1,0 +1,12 @@
+{
+  "name": "ACQB Demo",
+  "short_name": "ACQB",
+  "description": "Demo for Armchair Quarterback",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "icons": [{
+    "src": "images/icon.png",
+    "sizes": "192x192"
+  }]
+}
