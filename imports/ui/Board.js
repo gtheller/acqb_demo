@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Row from "./Row.js"
 import { UserData } from "../api/userCollection.js"
 
-export default class Leaderboard extends Component {
+export default class Board extends Component {
 
   renderUsers() {
     var sortedUsers = UserData.find({}, { sort: { score: -1 } }).fetch();

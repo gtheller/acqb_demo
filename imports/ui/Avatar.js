@@ -42,7 +42,7 @@ export default class Page1 extends Component {
   nextPage()
   {
     var tempUser = UserData.find({clientId: this.props.clientId}).fetch()[0];
-    UserData.update(tempUser._id, { $set: { page: 4 } });
+    UserData.update(tempUser._id, { $set: { avatar: this.state.path, page: 4 } });
   }
 
   render() {

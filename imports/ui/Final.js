@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Leaderboard from "./Leaderboard.js"
+import Board from "./Board.js"
 import { UserData } from "../api/userCollection.js"
 //import { Tasks } from '../api/tasks.js';
 // Task component - represents a single todo item
@@ -21,7 +21,7 @@ export default class Final extends Component {
         <p className="place">Score</p>
       </div>
 
-      <Leaderboard/>
+      <Board/>
       <p className="h1">{"Winner: "+winner}</p>
     </div>
     );

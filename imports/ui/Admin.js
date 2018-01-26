@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Leaderboard from './Leaderboard.js'
+import Board from './Board.js'
 import Buttons from './Buttons.js'
 import { UserData } from '../api/userCollection.js';
 import { IsAdmin } from '../api/adminCollection.js';
@@ -24,12 +24,12 @@ export default class Admin extends Component {
     //console.log(users);
     var correct = IsAdmin.find().fetch()[0].correctAns;
 
-    var numCorrect = 0;
+    var usersCorrect = 0;
     for(var a=0; a<users.length; a++)
     {
       if(users[a].answer==correct)
       {
-        numCorrect++;
+        usersCorrect++;
       }
     }
 
@@ -37,8 +37,9 @@ export default class Admin extends Component {
     {
       if(users[a].answer==correct)
       {
-        UserData.update(users[a]._id, { $inc: {score: Math.round(100/numCorrect)}});
+        UserData.update(users[a]._id, { $inc: {score: Math.round(100*users.length/usersCorrect), numCorrect: 1}});
       }
+      UserData.update(users[a]._id, { $inc: {totalQs: 1}});
     }
   }
 
@@ -57,7 +58,7 @@ export default class Admin extends Component {
     return (
     <div>
       <header>Admin</header>
-      {<Leaderboard/>}
+      {<Board/>}
       <br/>
       <div>
 
@@ -92,15 +93,14 @@ export default class Admin extends Component {
       <br/><br/>
       <div align="center">
         <button className="adButt" onClick={this.goToNum.bind(this,5)}>Question</button>
-        <button className="adButt" onClick={this.goToNum.bind(this,6)}>Results</button>
-        <button className="adButt" onClick={this.goToNum.bind(this,7)}>Board</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,7)}>Results</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,8)}>Board</button>
       </div>
       <br/><br/>
       <div align="center">
-        <button className="adButt" onClick={this.goToNum.bind(this,8)}>Show Winner</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,9)}>Show Winner</button>
+        <button className="adButt" onClick={this.goToNum.bind(this,10)}>Show Stats</button>
       </div>
-
-
     </div>
     );
   }

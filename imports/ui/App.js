@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Home from "./Home.js";
 import Register from "./Register.js";
 import Buttons from "./Buttons.js";
-import Leaderboard from "./Leaderboard.js";
+import LeaderBoard from "./LeaderBoard.js";
 import Avatar from "./Avatar.js"
 import Wait from "./Wait.js"
 import User from "./User.js"
 import Welcome from "./Welcome.js"
 import Admin from "./Admin.js"
-import Results from "./Results.js"
+import Board from "./Board.js"
 import Answer from "./Answer.js"
 import Final from "./Final.js"
+import Dance from "./Dance.js"
+import Stats from "./Stats.js"
 import { Random } from 'meteor/random';
 import { IsAdmin } from '../api/adminCollection.js';
 import { UserData } from '../api/userCollection.js';
@@ -134,9 +136,11 @@ export default class App extends Component {
           { this.state.page==3&& !this.state.admin ? <Avatar clientId={this.state.clientId}/> : null }
           { this.state.page==4&& !this.state.admin ? <Wait clientId={this.state.clientId}/> : null }
           { this.state.page==5&& !this.state.admin ? <Buttons clientId={this.state.clientId}/> : null }
-          { this.state.page==6&& !this.state.admin ? <Answer clientId={this.state.clientId} /> : null }
-          { this.state.page==7&& !this.state.admin ? <Results clientId={this.state.clientId}/> : null }
-          { this.state.page==8&& !this.state.admin ? <Final clientId={this.state.clientId}/> : null }
+          { this.state.page==6&& !this.state.admin ? <Dance clientId={this.state.clientId}/> : null }
+          { this.state.page==7&& !this.state.admin ? <Answer clientId={this.state.clientId} /> : null }
+          { this.state.page==8&& !this.state.admin ? <LeaderBoard clientId={this.state.clientId}/> : null }
+          { this.state.page==9&& !this.state.admin ? <Final clientId={this.state.clientId}/> : null }
+          { this.state.page==10&& !this.state.admin ? <Stats clientId={this.state.clientId}/> : null }
         </div>
         <div className="secretButt" onClick={this.beAdmin.bind(this)}></div>
       </div>

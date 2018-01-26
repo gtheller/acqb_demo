@@ -24,7 +24,10 @@ export default class Welcome extends Component {
       score: 0,
       createdAt: new Date(),
       answer: "None",
-      page: 2
+      page: 2,
+      avatar: "images/avatar1.gif",
+      numCorrect: 0,
+      totalQs: 0,
       });
     }
   }
