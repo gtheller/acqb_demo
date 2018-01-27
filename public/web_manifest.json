@@ -1,0 +1,32 @@
+{
+  "name": "ACQB Demo",
+  "short_name": "ACQB",
+  "description": "Demo for Armchair Quarterback",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#16abde",
+  "theme_color": "#16abde",
+  "oreintation": "landscape",
+  "icons": [
+      {
+        "src": "images/logo48.png",
+        "sizes": "48x48",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+        "src": "mages/logo144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+}
