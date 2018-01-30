@@ -3,6 +3,15 @@ import StatRow from "./StatRow.js"
 import { UserData } from "../api/userCollection.js"
 
 export default class Stats extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      players: 0,
+      plays: 0,
+      avgNumber: 0,
+      avgPercent: 0
+    };
+  }
 
   renderUsers() {
     var sortedUsers = UserData.find({}, { sort: { score: -1 } }).fetch();
@@ -14,7 +23,7 @@ export default class Stats extends Component {
       }
       else
       {
-        percent = user.numCorrect/user.totalQs*100;
+        percent = Math.round(user.numCorrect/user.totalQs*100) + "%";
       }
 
       userRank = sortedUsers.indexOf(user);
@@ -30,11 +39,12 @@ export default class Stats extends Component {
     });
   }
 
-  renderTotals()
+  componentDidMount()
   {
     var totalScore, totalCorrect = 0;
     var sortedUsers = UserData.find({}, { sort: { score: -1 } }).fetch();
     var total = sortedUsers[0].totalQs;
+    var numPlayers = sortedUsers.length;
 
     for(var u=0; u<sortedUsers.length; u++)
     {
@@ -42,6 +52,14 @@ export default class Stats extends Component {
       totalCorrect+=sortedUsers[u].numCorrect;
     }
 
+    var avgCorrect = totalCorrect/numPlayers;
+    var percentCorrect = avgCorrect/total;
+    if(total==0)
+    {
+      percentCorrect=0;
+    }
+
+    this.setState({players: numPlayers, plays: total, avgNumber: Math.round(avgCorrect*100)/100, avgPercent: Math.round(percentCorrect*100)+"%"});
   }
 
   render() {
@@ -49,7 +67,7 @@ export default class Stats extends Component {
     return (
 
       <div align="center">
-        <header>Leaderboard</header>
+        <header>Statistics</header>
         <br/>
         <img src="images/ACQB_logo_draft.png" alt="logo" width="400" height="200"/>
 
@@ -63,6 +81,13 @@ export default class Stats extends Component {
         <div align="center" className="leaderDiv">
           {this.renderUsers()}
         </div>
+
+        <br/><br/>
+
+        <p className="h2">Number of players: {this.state.players}</p>
+        <p className="h2">Number of plays: {this.state.plays}</p>
+        <p className="h2">Average number correct: {this.state.avgNumber}</p>
+        <p className="h2">Average percent correct: {this.state.avgPercent}</p>
 
       </div>
     );

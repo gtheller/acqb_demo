@@ -76,6 +76,7 @@ export default class Welcome extends Component {
           <p className="h2">Who&#39;s got bragging rights?</p>
           </div>
         </div>
+        <br/><br/><br/><br/>
         <div align="center"><button onClick={this.getStarted.bind(this)} className="startButton">Get Started</button></div>
       </div>
     );

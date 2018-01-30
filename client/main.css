@@ -104,6 +104,15 @@ p.block {
   vertical-align: middle;
 }
 
+p.stats {
+  font-size : 48px;
+  display: inline-block;
+  width: 250px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
 .adButt {
   -webkit-border-radius: 60;
   -moz-border-radius: 60;

@@ -36,15 +36,15 @@ export default class Buttons extends Component {
       	</tr>
       	<tr>
       		<td> <button className="runButton" onClick={this.insertAns.bind(this,"Left")}>Left</button> </td>
-      		<td> <button  className="passButton"  onClick={this.insertAns.bind(this,"Short")}>Short <br/> 0-4 yards</button> </td>
+      		<td> <button  className="passButton"  onClick={this.insertAns.bind(this,"Short")}>Short</button> </td>
       	</tr>
       	<tr>
       		<td> <button  className="runButton" onClick={this.insertAns.bind(this,"Middle")}>Middle</button> </td>
-      		<td> <button  className="passButton" onClick={this.insertAns.bind(this,"Medium")}>Medium <br/> 4-15 yards</button> </td>
+      		<td> <button  className="passButton" onClick={this.insertAns.bind(this,"Medium")}>Medium</button> </td>
       	</tr>
       	<tr>
       		<td> <button  className="runButton" onClick={this.insertAns.bind(this,"Right")}>Right</button> </td>
-      		<td> <button  className="passButton" onClick={this.insertAns.bind(this,"Long")}>Long <br/> 15+ yards</button> </td>
+      		<td> <button  className="passButton" onClick={this.insertAns.bind(this,"Long")}>Long</button> </td>
       	</tr>
       </tbody>
       </table>
